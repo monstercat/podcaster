@@ -3,6 +3,8 @@
 
   Generate podcast feeds from json, WIP.
 
+  [![build status](https://secure.travis-ci.org/monstercat/podcaster.png)](http://travis-ci.org/monstercat/podcaster)
+
 ## Installation
 
     $ npm install monstercat/podcaster
