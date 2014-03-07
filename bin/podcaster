@@ -1,0 +1,13 @@
+#!/usr/bin/env node
+
+var args = process.argv.slice(2);
+var podcast = require('..');
+
+var config = args[0];
+
+if (!config)
+  return console.error("usage: podcaster config.json");
+
+podcast(config, function(err, data){
+  console.log(data.xml);
+});

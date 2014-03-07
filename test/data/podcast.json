@@ -1,0 +1,32 @@
+{
+  "title": "Monstercat Podcast",
+  "description": "The best podcast around",
+  "feed_url": "http://www.monstercat.com/podcast/rss.xml",
+  "site_url": "http://www.monstercat.com/podcast",
+  "image_url": "http://www.monstercat.com/podcast/1400x1400.jpg",
+  "docs": "http://www.monstercat.com/podcast",
+  "managingEditor": "dan@monstercat.com (Dan Scarcelli)",
+  "webMaster": "bill@monstercat.com (William Casarin)",
+  "copyright": "2014 Monstercat",
+  "language": "en",
+  "categories": ["edm", "dubstep", "bass"],
+  "ttl": 60,
+  "itunesAuthor": "Monstercat",
+  "itunesSubtitle": "Cats and bass",
+  "itunesSummary": "Some summary",
+  "itunesOwner": {
+    "name": "Monstercat",
+    "email": "podcast@monstercat.com"
+  },
+  "itunesExplicit": false,
+  "itunesCategory": {
+    "name": "Entertainment",
+    "subcats": null
+  },
+  "itunesImage": "http://www.monstercat.com/podcast/1400x1400.jpg",
+	"items": ["podcast/**/*.json"],
+  "itemDefaults": {
+    "itunesAuthor": "Monstercat",
+    "author": "Monstercat"
+  }
+}

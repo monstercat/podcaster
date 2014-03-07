@@ -1,0 +1,25 @@
+{
+  "name": "podcaster",
+  "description": "Podcast generator",
+  "version": "0.0.0",
+  "repository": {
+    "url": "git://github.com/monstercat/podcaster.git"
+  },
+  "main": "index.js",
+  "scripts": {
+    "test": "make test"
+  },
+  "dependencies": {
+    "yaml": "*",
+    "rss": "*",
+    "async": "~0.2.10",
+    "glob": "~3.2.9",
+    "debug": "~0.7.4",
+    "xtend": "^2.1.2"
+  },
+  "devDependencies": {
+    "mocha": "*",
+    "expect": "*",
+    "better-assert": "^1.0.0"
+  }
+}
