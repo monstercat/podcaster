@@ -4,7 +4,8 @@ var debug = require('debug')('monstercat-podcast');
 var fs = require('fs');
 var async = require('async');
 var Rss = require('rss');
-var glob = require('glob');
+var globs = require('./lib/globs');
+var resolve = require('./lib/resolve');
 var extend = require('xtend');
 
 var exports = module.exports = podcast;
@@ -35,27 +36,6 @@ exports.parse = function(target, done) {
 
 
 /**
- * Glob multiple glob strings
- *
- * @param {Array} an array of glob strings
- * @param {Function} result callback (err, paths)
- * @api public
- */
-
-exports.globs = function(gs, done){
-  function step(memo, g, done) {
-    glob(g, function(err, files){
-      if (err) return done(err);
-      memo = memo.concat(files);
-      done(err, memo);
-    });
-  }
-
-  async.reduce(gs, [], step, done);
-};
-
-
-/**
  * listify :: Either a [a] -> [a]
  */
 
@@ -64,21 +44,6 @@ exports.listify = function(items){
   return array? items : items? [items] : null;
 };
 
-
-/**
- * Resolve glob paths relative to the config path
- *
- * @param {String} config path
- * @param {String} glob path
- * @return {String} resolved directory
- * @api public
- */
-
-exports.resolve = function(config, item) {
-  if (item[0] === '/') return item;
-  var dir = path.dirname(config);
-  return path.resolve(path.join(dir, item));
-};
 
 /**
  * config and items to rss
@@ -112,9 +77,9 @@ function podcast(filename, done) {
 
     debug('config: %j', config);
     var items = exports.listify(config.items || "podcast/**/*.json");
-    items = items.map(exports.resolve.bind(null, filename));
+    items = items.map(resolve.bind(null, filename));
 
-    exports.globs(items, function(err, files){
+    globs(items, function(err, files){
       debug('globbed: %j', files);
       if (err) return done(err);
 
