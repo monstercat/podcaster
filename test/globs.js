@@ -4,7 +4,7 @@ var join = require('path').join;
 var assert = require('better-assert');
 
 describe('globs', function(){
-  it('works ok', function(done){
+  it('works with nested json', function(done){
     var p = join(__dirname, "data/**/*.json");
     globs([p], function(err, files){
       assert(!err);
