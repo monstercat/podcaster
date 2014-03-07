@@ -1,39 +1,14 @@
 
 var path = require('path');
 var debug = require('debug')('monstercat-podcast');
-var fs = require('fs');
 var async = require('async');
 var Rss = require('rss');
 var globs = require('./lib/globs');
 var resolve = require('./lib/resolve');
+var parse = require('./lib/parse');
 var extend = require('xtend');
 
 var exports = module.exports = podcast;
-
-/**
- * Parse a file from JSON 
- *
- * @param {String} json file path
- * @param {Function} result callback (err, obj)
- * @api public
- */
-
-exports.parse = function(target, done) {
-  fs.readFile(target, function(err, data){
-    if (err) return done(err);
-    var parsed;
-
-    try {
-      parsed = JSON.parse(data.toString());
-    } 
-    catch (e) {
-      return done(e);
-    }
-
-    done(null, parsed);
-  });
-};
-
 
 /**
  * listify :: Either a [a] -> [a]
@@ -72,7 +47,7 @@ exports.rss = function(config, items){
 
 function podcast(filename, done) {
   debug('reading config...');
-  exports.parse(filename, function(err, config){
+  parse(filename, function(err, config){
     if (err) return done(err);
 
     debug('config: %j', config);
@@ -83,7 +58,7 @@ function podcast(filename, done) {
       debug('globbed: %j', files);
       if (err) return done(err);
 
-      async.map(files, exports.parse, function(err, items){
+      async.map(files, parse, function(err, items){
         if (err) return done(err);
         var defs = !!config.itemDefaults;
         debug("has item defaults? %s", defs);
